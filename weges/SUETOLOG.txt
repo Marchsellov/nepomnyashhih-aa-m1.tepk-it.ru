@@ -1,0 +1,28 @@
+1. При создании выпадающий список в файле partner/_form.php: 
+
+<?= $form->field($model, 'partnertype_id')->dropDownList(
+        \yii\helpers\ArrayHelper::map(
+            \app\models\PartnerTypeModel::find()->all(),
+            'id_partnertype', 'name'
+        ),
+        ['prompt' => 'Выберите тип']
+    ) ?>
+
+2. Имена партнеров вместо айднишников в таблице партнеров в файле PartnerModel:
+
+public function getPartnerType()
+    {
+        return $this->hasOne(PartnerTypeModel::class, ['id_partnertype' => 'partnertype_id']);
+    }
+И в файле partner/index.php:
+[
+    'attribute' => 'partnertype_id',
+    'value' => function($model) {
+        return $model->partnerType ? $model->partnerType->name : '—';
+    },
+    'label' => 'Тип партнёра',
+],
+
+3. Файл .htaccess:
+RewriteEngine on 
+RewriteRule (.*)? /web/$1
