@@ -17,7 +17,7 @@ $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
-$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/icon.ico')]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -39,19 +39,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
+
+            ['label' => 'Заявки от партнеров', 'url' => ['/partner-products-request/index']],
+            ['label' => 'Список партнеров', 'url' => ['/partners/index']],
+            //['label' => 'Заявки', 'url' => ['partners/index']],
+
+//            Yii::$app->user->isGuest
+//                ? ['label' => 'Login', 'url' => ['/site/login']]
+//                : '<li class="nav-item">'
+//                    . Html::beginForm(['/site/logout'])
+//                    . Html::submitButton(
+//                        'Logout (' . Yii::$app->user->identity->username . ')',
+//                        ['class' => 'nav-link btn btn-link logout']
+//                    )
+//                    . Html::endForm()
+//                    . '</li>'
         ]
     ]);
     NavBar::end();
